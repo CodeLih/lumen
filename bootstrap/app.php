@@ -115,4 +115,7 @@ $app->withFacades();
 $app->withEloquent();
 $app->configure('open');
 $app->register(App\Providers\ValidatorServiceProvider::class);
+$app->routeMiddleware([
+	'auth' => App\Http\Middleware\Authenticate::class
+]);
 return $app;

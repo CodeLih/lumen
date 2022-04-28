@@ -9,6 +9,8 @@ use App\Model\User;
 use App\Pipe\PipeImpl\Pipeline;
 use App\Pipe\PipeImpl\StageAddOne;
 use App\Pipe\PipeImpl\StageAddTwo;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Laravel\Lumen\Routing\Controller as BaseController;
@@ -20,7 +22,7 @@ class TestController extends BaseController
 
 	/***
 	 * @param Request $request
-	 * @throws \Exception
+	 *
 	 */
     public function index(Request $request)
     {
@@ -93,11 +95,23 @@ class TestController extends BaseController
 //		$arr = config('open.api');
 
 		//$this->dispatch(new ExampleJob());
-		User::query()->insert([
-			'age' => 1
-		]);
+//		User::query()->insert([
+//			'age' => 1
+//		]);
+//
+//		echo 666;die;
+		try {
 
-		echo 666;die;
+			$client = new Client();
+			$res = $client->request('get', 'https://www.baidusss.com');
+			echo $res->getStatusCode();
+			print_r($res->getHeader('content-type'));
+			print_r($res->getBody());
+		}catch (GuzzleException $e) {
+			echo '访问异常';
+			//echo $e->getMessage();
+		}
+
 
     }
 
