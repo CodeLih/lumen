@@ -107,15 +107,17 @@ $app->configure('app');
 */
 
 $app->router->group([
-    'namespace' => 'App\Http\Controllers',
+    'namespace' 	=> 'App\Http\Controllers',
 ], function ($router) {
     require __DIR__.'/../routes/web.php';
 });
 $app->withFacades();
 $app->withEloquent();
 $app->configure('open');
+//$app->configure('auth');
 $app->register(App\Providers\ValidatorServiceProvider::class);
-$app->routeMiddleware([
-	'auth' => App\Http\Middleware\Authenticate::class
-]);
+$app->register(App\Providers\EventServiceProvider::class);
+//$app->routeMiddleware([
+//	'auth' => App\Http\Middleware\Authenticate::class
+//]);
 return $app;
