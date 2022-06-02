@@ -20,6 +20,7 @@ class TestTokenController extends Controller
 			'exp' => time() + 7200 ,//过期时间
 			'uid' => 123, //用户id，有用户其他信息也可以添加
 		];
+		echo 1111;
 		$jwt = JWT::encode($token, $key, 'HS256');
 		return $jwt;
 
